@@ -49,24 +49,13 @@ git clone https://github.com/seu-usuario/furia-chatbot.git
 cd furia-chatbot
 
 2. Configure as variáveis de ambiente
-Crie um arquivo .env na raiz com as seguintes variáveis:
+Use um arquivo .env.sample para criar o .env
 
-AWS_ACCESS_KEY_ID= Sua chave de acesso
-AWS_SECRET_ACCESS_KEY= Sua chave secreta
-AWS_DEFAULT_REGION=us-east-1
+3. Rode o scrapper para buscar os dados atualizados sobre a Furia!
+  docker compose up scrapper --build
+3.1 Este container criará um arquivo furia.json no diretório /data
 
-LEX_BOT_ID=xxxxxxxxxxxx
-LEX_BOT_ALIAS_ID=xxxxxxxxxxxx
-LEX_LOCALE_ID=pt_BR
+4. Rode frontend para interagir com o chatbot
+  docker compose up frontend --build
 
-Ou use o .env.example como base:
-cp .env.example .env
-
-3. Construa a imagem Docker
-docker build -t furia-chatbot .
-
-4. Rode o container
-docker run --env-file .env -p 8501:8501 furia-chatbot
-
-5. Acesse no navegador
-http://localhost:8501
+```
