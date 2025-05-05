@@ -1,0 +1,20 @@
+services:
+  scrapper:
+    build: .
+    environment:
+      - DRAFT5_FURIA_ID=330
+      - DRAFT5_FURIA_NAME=FURIA
+      - SCRAPPER_FILE_OUTPUT_PATH=/data
+    entrypoint: [ "poetry", "run", "python", "backend/scrapper.py" ]
+    volumes:
+      - ./data:/data
+
+  frontend:
+    build: .
+    entrypoint: [ "poetry", "run", "streamlit", "run", "frontend/app.py" ]
+    volumes:
+      - ./data:/data
+    ports:
+      - 8501:8501
+    depends_on:
+      - scrapper
